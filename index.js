@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const productRoute = require("./routes/product.route");
+const userRoute = require("./routes/user.route");
 
-// Cargar variables de entorno
 require('dotenv').config();
 
 const app = express();
@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/products", productRoute)
+app.use("/api/users", userRoute)
 
 app.get("/", (req, res) => {
     res.send("Hellooo there")
