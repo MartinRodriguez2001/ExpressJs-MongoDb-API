@@ -11,9 +11,15 @@ const UserSchema = mongoose.Schema(
             required: [true, "Provide an email for the user"],
             unique: true,
         },
-        products:{
-            type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
-            default: []
+        password:{
+            type: String,
+            required: [true, "La contraseña es requerida"],
+            minlength: [6, "La constraseña debe tener al menos 6 caracteres"]
+        },
+        role:{
+            type: String,
+            enum: ["user", "admin"],
+            default: "user"
         }
 
     },
@@ -22,5 +28,5 @@ const UserSchema = mongoose.Schema(
     }
 )
 
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.models.User || mongoose.model("User", UserSchema);
 module.exports = User;

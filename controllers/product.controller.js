@@ -57,7 +57,11 @@ const deleteProduct = async (req, res) => {
 }
 const createProduct = async (req, res) => {
      try {
-            const product = await Product.create(req.body)
+            const productData = {
+                ...req.body,
+                createdBy: req.user._id
+            }
+            const product = await Product.create(productData)
             res.status(200).json(product)
         } catch (error) {
             res.status(500).json({message: error.message})

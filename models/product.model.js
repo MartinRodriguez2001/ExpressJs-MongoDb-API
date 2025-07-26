@@ -20,6 +20,11 @@ const ProductSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    createdBy:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    }
   },
   {
     timestamps: true
