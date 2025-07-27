@@ -2,6 +2,24 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model")
 
+
+const adminValidation = async (email) => {
+    const validEmail = "@admin.com"
+            if (email.endsWith(validEmail)) {
+                const user = await User.create({
+                    name,
+                    email,
+                    password: hashedPassword,
+                    role: "admin"
+                })
+                return res.status(201).json({
+                    message: "Administrador registrado exitosamente",
+                    user
+                })
+
+            }
+}
+
 const register = async (req, res) => {
     const {name, email, password, role} = req.body;
     try {
@@ -13,12 +31,12 @@ const register = async (req, res) => {
         const saltRounds = 10
         const hashedPassword = await bcrypt.hash(password, saltRounds)
 
-        const user = await User.create({
-            name,
-            email,
-            password: hashedPassword,
-            role: role || "user"
-        })
+            const user = await User.create({
+                name,
+                email,
+                password: hashedPassword,
+                role: role || "user"
+            })
 
         const token = jwt.sign({userId: user._id, email: user.email, role: user.role},
             process.env.JWT_SECRET,

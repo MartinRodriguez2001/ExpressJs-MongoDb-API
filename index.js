@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const productRoute = require("./routes/product.route");
 const userRoute = require("./routes/user.route");
 const authRoute = require("./routes/auth.route")
-
+const aiRoutes = require("./routes/ia.route");
 require('dotenv').config();
 
 const app = express();
@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/products", productRoute)
 app.use("/api/users", userRoute)
 app.use("/api/auth", authRoute)
+app.use("/api/ai", aiRoutes)
 
 app.get("/", (req, res) => {
     res.send("Hellooo there")
